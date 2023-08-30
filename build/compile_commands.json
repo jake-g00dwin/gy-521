@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/ronin/Documents/Projects/C/cmocka_template/build/src",
+  "command": "/usr/bin/cc  -I/home/ronin/Documents/Projects/C/cmocka_template/src/led_driver -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/main.dir/main.c.o -c /home/ronin/Documents/Projects/C/cmocka_template/src/main.c",
+  "file": "/home/ronin/Documents/Projects/C/cmocka_template/src/main.c"
+},
+{
+  "directory": "/home/ronin/Documents/Projects/C/cmocka_template/build/src/led_driver",
+  "command": "/usr/bin/cc  -I/home/ronin/Documents/Projects/C/cmocka_template/src/led_driver -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/led_driver.dir/led_driver.c.o -c /home/ronin/Documents/Projects/C/cmocka_template/src/led_driver/led_driver.c",
+  "file": "/home/ronin/Documents/Projects/C/cmocka_template/src/led_driver/led_driver.c"
+},
+{
+  "directory": "/home/ronin/Documents/Projects/C/cmocka_template/build/tests/led_driver",
+  "command": "/usr/bin/cc  -I/usr/local/include -I/src -I/home/ronin/Documents/Projects/C/cmocka_template/src/led_driver -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/test_led_driver.dir/test_led_driver.c.o -c /home/ronin/Documents/Projects/C/cmocka_template/tests/led_driver/test_led_driver.c",
+  "file": "/home/ronin/Documents/Projects/C/cmocka_template/tests/led_driver/test_led_driver.c"
+},
+{
+  "directory": "/home/ronin/Documents/Projects/C/cmocka_template/build/tests/simple_test",
+  "command": "/usr/bin/cc  -I/usr/local/include -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/simple_test.dir/simple_test.c.o -c /home/ronin/Documents/Projects/C/cmocka_template/tests/simple_test/simple_test.c",
+  "file": "/home/ronin/Documents/Projects/C/cmocka_template/tests/simple_test/simple_test.c"
+}
+]
