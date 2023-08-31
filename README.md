@@ -100,4 +100,10 @@ Things I want to add in the future:
 
 
 
+##TDD stuff
+
+- what does a struct typedef <name_struct> \*struct actually mean?
+
+
+
 
