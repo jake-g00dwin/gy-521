@@ -10,12 +10,15 @@
 
 uint8_t fake_twi_addr = 0x0;
 uint8_t fake_twi_data[16] = {0x0};
-
+uint8_t fake_regs[117] = {0x0};
 
 /* Fake Object for TWI_TX*/
 void fake_twi_tx(uint8_t slave_addr, uint8_t *data, uint8_t size)
 {
-    fake_twi_addr = slave_addr; 
+    fake_twi_addr = slave_addr;
+    for(int i = 0; i < size; i++) {
+        
+    } 
 }
 
 /* Fake Object for TWI_RX*/
@@ -58,9 +61,20 @@ static void test_gy521_init(void **state) {
 }
 
 
-static void test_gy521_update(void **sate)
+static void test_gy521_update_accel(void **sate)
 {
-    assert_false(1);
+    /*check it reads the accel registers*/
+    gy521_module *m = gy521_new();
+    fake_twi_data[0] = TWI_GY521_ADDR1;
+    gy521_init(m, TWI_GY521_ADDR1);
+    
+    /*Ensure the correct registers are read*/
+
+    /*Check that the values are assembled correctly*/
+    
+    gy521_update_accel(m); 
+
+    gy521_free(m);
 }
 
 
@@ -68,8 +82,7 @@ int main(void)
 {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_gy521_init),
-        cmocka_unit_test(test_gy521_update),
-
+        cmocka_unit_test(test_gy521_update_accel),
     }; 
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
