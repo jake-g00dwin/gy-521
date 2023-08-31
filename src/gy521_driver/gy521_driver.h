@@ -42,8 +42,8 @@ extern void (*gy521_twi_rx)(uint8_t, uint8_t*, uint8_t);
 
 struct gy521_module* gy521_new(void);
 _Bool gy521_init(struct gy521_module *m, uint8_t slave_address);
-_Bool gy521_update_gyro(struct gy521_module* m);
-_Bool gy521_update_accel(struct gy521_module* m);
+void gy521_update_gyro(struct gy521_module* m);
+void gy521_update_accel(struct gy521_module* m);
 void gy521_free(struct gy521_module *m);
 
 
