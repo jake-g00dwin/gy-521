@@ -1,22 +1,32 @@
 [
 {
-  "directory": "/home/ronin/Documents/Projects/C/cmocka_template/build/src",
-  "command": "/usr/bin/cc  -I/home/ronin/Documents/Projects/C/cmocka_template/src/led_driver -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/main.dir/main.c.o -c /home/ronin/Documents/Projects/C/cmocka_template/src/main.c",
-  "file": "/home/ronin/Documents/Projects/C/cmocka_template/src/main.c"
+  "directory": "/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/build/src",
+  "command": "/usr/bin/cc  -I/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/src/led_driver -I/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/src/gy521_driver -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/main.dir/main.c.o -c /home/ronin/Documents/Projects/microcontrollers/modules/gy-521/src/main.c",
+  "file": "/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/src/main.c"
 },
 {
-  "directory": "/home/ronin/Documents/Projects/C/cmocka_template/build/src/led_driver",
-  "command": "/usr/bin/cc  -I/home/ronin/Documents/Projects/C/cmocka_template/src/led_driver -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/led_driver.dir/led_driver.c.o -c /home/ronin/Documents/Projects/C/cmocka_template/src/led_driver/led_driver.c",
-  "file": "/home/ronin/Documents/Projects/C/cmocka_template/src/led_driver/led_driver.c"
+  "directory": "/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/build/src/led_driver",
+  "command": "/usr/bin/cc  -I/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/src/led_driver -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/led_driver.dir/led_driver.c.o -c /home/ronin/Documents/Projects/microcontrollers/modules/gy-521/src/led_driver/led_driver.c",
+  "file": "/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/src/led_driver/led_driver.c"
 },
 {
-  "directory": "/home/ronin/Documents/Projects/C/cmocka_template/build/tests/led_driver",
-  "command": "/usr/bin/cc  -I/usr/local/include -I/src -I/home/ronin/Documents/Projects/C/cmocka_template/src/led_driver -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/test_led_driver.dir/test_led_driver.c.o -c /home/ronin/Documents/Projects/C/cmocka_template/tests/led_driver/test_led_driver.c",
-  "file": "/home/ronin/Documents/Projects/C/cmocka_template/tests/led_driver/test_led_driver.c"
+  "directory": "/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/build/src/gy521_driver",
+  "command": "/usr/bin/cc  -I/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/src/gy521_driver -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/gy521_driver.dir/gy521_driver.c.o -c /home/ronin/Documents/Projects/microcontrollers/modules/gy-521/src/gy521_driver/gy521_driver.c",
+  "file": "/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/src/gy521_driver/gy521_driver.c"
 },
 {
-  "directory": "/home/ronin/Documents/Projects/C/cmocka_template/build/tests/simple_test",
-  "command": "/usr/bin/cc  -I/usr/local/include -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/simple_test.dir/simple_test.c.o -c /home/ronin/Documents/Projects/C/cmocka_template/tests/simple_test/simple_test.c",
-  "file": "/home/ronin/Documents/Projects/C/cmocka_template/tests/simple_test/simple_test.c"
+  "directory": "/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/build/tests/led_driver",
+  "command": "/usr/bin/cc  -I/usr/local/include -I/src -I/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/src/led_driver -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/test_led_driver.dir/test_led_driver.c.o -c /home/ronin/Documents/Projects/microcontrollers/modules/gy-521/tests/led_driver/test_led_driver.c",
+  "file": "/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/tests/led_driver/test_led_driver.c"
+},
+{
+  "directory": "/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/build/tests/simple_test",
+  "command": "/usr/bin/cc  -I/usr/local/include -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/simple_test.dir/simple_test.c.o -c /home/ronin/Documents/Projects/microcontrollers/modules/gy-521/tests/simple_test/simple_test.c",
+  "file": "/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/tests/simple_test/simple_test.c"
+},
+{
+  "directory": "/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/build/tests/gy521_driver",
+  "command": "/usr/bin/cc  -I/usr/local/include -I/src -I/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/src/gy521_driver -Wall -Werror -Wpedantic -std=gnu17 -o CMakeFiles/test_gy521_driver.dir/test_gy521_driver.c.o -c /home/ronin/Documents/Projects/microcontrollers/modules/gy-521/tests/gy521_driver/test_gy521_driver.c",
+  "file": "/home/ronin/Documents/Projects/microcontrollers/modules/gy-521/tests/gy521_driver/test_gy521_driver.c"
 }
 ]
