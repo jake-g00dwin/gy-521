@@ -8,6 +8,7 @@
 #define GY521_DRIVER_H
 
 #include <stdint.h>
+#include <stdlib.h>
 
 /*
  * ############################
@@ -24,8 +25,7 @@
  * Types/Structures 
  * ############################
  */ 
-//typedef struct gy521_module_struct *gy521_module;
-typedef struct gy521_module_struct *gy521_module;
+typedef struct gy521_module gy521_module;
 
 /*
  * ############################
@@ -33,17 +33,18 @@ typedef struct gy521_module_struct *gy521_module;
  * ############################
  */ 
 
+
 /*Function pointers for the TX and RX fuctionality*/
-extern void twi_tx(uint8_t *data, uint8_t size);
-extern void twi_rx(uint8_t *data, uint8_t size);
 
-_Bool init_gy521(uint8_t slave_address);
-
+extern void (*gy521_twi_tx)(uint8_t, uint8_t*, uint8_t);
+extern void (*gy521_twi_rx)(uint8_t, uint8_t*, uint8_t);
 
 
-_Bool module_test(struct gy521_module_struct *m);
-uint8_t test_function(void);
-
+struct gy521_module* gy521_new(void);
+_Bool gy521_init(struct gy521_module *m, uint8_t slave_address);
+_Bool gy521_update_gyro(struct gy521_module* m);
+_Bool gy521_update_accel(struct gy521_module* m);
+void gy521_free(struct gy521_module *m);
 
 
 #endif /* GY521_DRIVER_H */   
