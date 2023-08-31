@@ -1,4 +1,5 @@
 add_subdirectory(led_driver)
+add_subdirectory(gy521_driver)
 
 
 add_executable(main
@@ -6,5 +7,6 @@ add_executable(main
 )
 
 target_link_libraries(main
-    led_driver 
+    led_driver
+    gy521_driver
 )
