@@ -24,7 +24,19 @@
  * ############################
  * Types/Structures 
  * ############################
- */ 
+ */
+typedef struct gyro_values{
+    uint16_t x;
+    uint16_t y;
+    uint16_t z;
+}gyro_values_struct;
+
+typedef struct accel_values{
+    uint16_t x;
+    uint16_t y;
+    uint16_t z;
+}accel_values_struct;
+
 typedef struct gy521_module gy521_module;
 
 /*
@@ -45,6 +57,7 @@ _Bool gy521_init(struct gy521_module *m, uint8_t slave_address);
 void gy521_update_gyro(struct gy521_module* m);
 void gy521_update_accel(struct gy521_module* m);
 void gy521_free(struct gy521_module *m);
-
+struct accel_values gy521_get_accel(struct gy521_module* m);
+struct gyro_values gy521_get_gyro(struct gy521_module* m);
 
 #endif /* GY521_DRIVER_H */   

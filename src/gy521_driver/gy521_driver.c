@@ -54,17 +54,7 @@ enum gy521_map {
  * ############################
  */ 
 
-typedef struct{
-    uint16_t x;
-    uint16_t y;
-    uint16_t z;
-}gyro_values_struct;
 
-typedef struct{
-    uint16_t x;
-    uint16_t y;
-    uint16_t z;
-}accel_values_struct;
 
 struct gy521_module{
     uint8_t slave_address;
@@ -139,6 +129,7 @@ _Bool gy521_init(gy521_module *m, uint8_t slave_address) {
 
 void gy521_update_accel(gy521_module *m)
 {
+    /*We shift the High byte over by 8 for a u16*/
     m->accel.x = read_register(m, accel_xouth) <<8;
     m->accel.x |= read_register(m, accel_xoutl);
     m->accel.y = read_register(m, accel_youth) <<8;
@@ -149,6 +140,7 @@ void gy521_update_accel(gy521_module *m)
 
 void gy521_update_gyro(gy521_module *m)
 {
+    /*We shift the High byte over by 8 for a u16*/
     m->gyro.x = read_register(m, gyro_xouth) <<8;
     m->gyro.x |= read_register(m, gyro_xoutl);
     m->gyro.y = read_register(m, gyro_youth) <<8;
@@ -158,3 +150,21 @@ void gy521_update_gyro(gy521_module *m)
 }
 
 
+struct accel_values gy521_get_accel(struct gy521_module* m)
+{
+    struct accel_values s;
+    s.x = m->accel.x;
+    s.y = m->accel.y;
+    s.z = m->accel.z;
+    return s;
+}
+
+
+struct gyro_values gy521_get_gyro(struct gy521_module* m)
+{
+    struct gyro_values s;
+    s.x = m->gyro.x;
+    s.y = m->gyro.y;
+    s.z = m->gyro.z;
+    return s;
+}
