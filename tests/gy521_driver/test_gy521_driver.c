@@ -128,11 +128,53 @@ static void test_gy521_update_accel(void **sate)
 }
 
 
+static void test_gy521_update_gyro(void **sate)
+{
+    /*check it reads the gyro registers*/
+    gy521_module *m = gy521_new();
+    reg_addr_arr[0].addr = TWI_GY521_ADDR1;
+    gy521_init(m, TWI_GY521_ADDR1);
+    
+    /*Setup the fake gyro values.*/
+    for(uint8_t i = 0; i < 6; i++) {
+        reg_addr_arr[i].value = i * 8;
+    }
+  
+    /*Zero the global index for the TWI*/ 
+    idx = 0;  
+    gy521_update_gyro(m); 
+
+    /*Ensure the correct registers are read*/
+    _Bool is_correct = 1;
+    assert_true(is_correct);
+    for(uint8_t i = 0; i < 6; i++){
+        /*The starting address of the registers is 67 and goes to 72*/ 
+        if((67 + i) != reg_addr_arr[i].addr) {
+            is_correct = 0;
+        }
+    }
+    assert_true(is_correct);     
+
+    /*Check that the values are assembled correctly*/
+    struct gyro_values gyro = gy521_get_gyro(m);
+
+    /*Make sure to bitshift by 8 and recomine the two u8 into a single u16*/
+    assert_true(gyro.x == ((reg_addr_arr[0].value<<8) | reg_addr_arr[1].value));
+    assert_true(gyro.y == ((reg_addr_arr[2].value<<8) | reg_addr_arr[3].value));
+    assert_true(gyro.z == ((reg_addr_arr[4].value<<8) | reg_addr_arr[5].value));
+
+    gy521_free(m);
+}
+
+
+
+
 int main(void)
 {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_gy521_init),
         cmocka_unit_test(test_gy521_update_accel),
+        cmocka_unit_test(test_gy521_update_gyro),
     }; 
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
