@@ -8,26 +8,46 @@
 
 #define WRITE_BIT   (1<<7)
 
-uint8_t fake_twi_addr = 0x0;
-uint8_t fake_twi_data[16] = {0x0};
-uint8_t fake_regs[117] = {0x0};
+typedef struct reg_addr{
+    uint8_t dev_addr;
+    uint8_t addr;
+    uint8_t value;
+}reg_addr;
+
+reg_addr reg_addr_arr[16] = {{0x0, 0x0, 0x0}};
+uint8_t idx = 0;
 
 /* Fake Object for TWI_TX*/
 void fake_twi_tx(uint8_t slave_addr, uint8_t *data, uint8_t size)
 {
-    fake_twi_addr = slave_addr;
-    for(int i = 0; i < size; i++) {
-        
+    /*Save the slave address passed*/
+    reg_addr_arr[0].dev_addr = slave_addr;
+
+    /*Now write all the passed data*/
+    for(; idx < size; idx++) {
+        reg_addr_arr[idx].addr = *(data);
+        reg_addr_arr[idx].value = *(++data);
     } 
+    /*Post increment the global index*/
+    idx++;
 }
 
 /* Fake Object for TWI_RX*/
 void fake_twi_rx(uint8_t slave_addr, uint8_t *data, uint8_t size)
 {
-    fake_twi_addr = slave_addr;
-    for(int i = 0; i < size; i++) {
-        *data++ = fake_twi_data[i];
+    /*Save the slave address passed*/
+    reg_addr_arr[0].dev_addr = slave_addr;
+    
+    /*Read the registers requested*/
+    for(; idx < size; idx++) {
+        /*Wridxte the register read address*/
+        reg_addr_arr[idx].addr = *(data + idx);
+        
+        /*Read the response value idxnto the pased data ptr*/
+        *(data + idx) = reg_addr_arr[idx].value;
     }
+    /*Post increment the global index*/
+    idx++;
 }
 
 
@@ -46,15 +66,23 @@ static void test_gy521_init(void **state) {
     /*Check for it's confirmation of the right twi device*/
     assert_false(gy521_init(m, TWI_GY521_ADDR1));
 
-    /*Now give it the correct response*/
-    fake_twi_data[0] = TWI_GY521_ADDR1;
+    /*Fill the address and the value registers with correct response value*/
+    /*The zero element get's read on init of the module*/
+    reg_addr_arr[0].addr = TWI_GY521_ADDR1;
+    reg_addr_arr[0].value = TWI_GY521_ADDR1;
+    idx = 0;
+
+    /*Check that it worked*/
     assert_true(gy521_init(m, TWI_GY521_ADDR1));
-    assert_true(TWI_GY521_ADDR1 == fake_twi_addr); 
+    assert_true(TWI_GY521_ADDR1 == reg_addr_arr[0].dev_addr); 
 
 
-    fake_twi_data[0] = TWI_GY521_ADDR2;
+    reg_addr_arr[0].addr = TWI_GY521_ADDR2;
+    reg_addr_arr[0].value = TWI_GY521_ADDR2;
+    idx = 0;
+
     assert_true(gy521_init(m, TWI_GY521_ADDR2));
-    assert_true(TWI_GY521_ADDR2 == fake_twi_addr); 
+    assert_true(TWI_GY521_ADDR2 == reg_addr_arr[0].dev_addr); 
 
     gy521_free(m);
  
@@ -65,15 +93,31 @@ static void test_gy521_update_accel(void **sate)
 {
     /*check it reads the accel registers*/
     gy521_module *m = gy521_new();
-    fake_twi_data[0] = TWI_GY521_ADDR1;
+    reg_addr_arr[0].addr = TWI_GY521_ADDR1;
     gy521_init(m, TWI_GY521_ADDR1);
     
+    /*Setup the fake accel values.*/
+    for(uint8_t i = 0; i < 6; i++) {
+        reg_addr_arr[i].value = i;
+    }
+    
+    idx = 0;  
+    gy521_update_accel(m); 
+
+
     /*Ensure the correct registers are read*/
+    _Bool is_correct = 1;
+    for(int i = 0; i < 6; i++){
+        /*The starting address of the registers is 59 and goes to 64*/
+        print_message("expected: %d, actual: %d\n", (59+i), reg_addr_arr[i].addr);
+        if((59 + i) != reg_addr_arr[i].addr) {
+            is_correct = 0;
+        }
+    }
+    assert_true(is_correct);     
 
     /*Check that the values are assembled correctly*/
     
-    gy521_update_accel(m); 
-
     gy521_free(m);
 }
 
