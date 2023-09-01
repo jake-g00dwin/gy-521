@@ -98,7 +98,7 @@ static void test_gy521_update_accel(void **sate)
     
     /*Setup the fake accel values.*/
     for(uint8_t i = 0; i < 6; i++) {
-        reg_addr_arr[i].value = i;
+        reg_addr_arr[i].value = i * 8;
     }
   
     /*Zero the global index for the TWI*/ 
@@ -117,8 +117,12 @@ static void test_gy521_update_accel(void **sate)
     assert_true(is_correct);     
 
     /*Check that the values are assembled correctly*/
+    struct accel_values accel = gy521_get_accel(m);
 
-
+    /*Make sure to bitshift by 8 and recomine the two u8 into a single u16*/
+    assert_true(accel.x == ((reg_addr_arr[0].value<<8) | reg_addr_arr[1].value));
+    assert_true(accel.y == ((reg_addr_arr[2].value<<8) | reg_addr_arr[3].value));
+    assert_true(accel.z == ((reg_addr_arr[4].value<<8) | reg_addr_arr[5].value));
 
     gy521_free(m);
 }
