@@ -1,7 +1,7 @@
 /*
  * Author: Jake Goodwin
  * Date: 2023
- * Description:
+ * Description: The implimentation file for the gy521 module, assumes TWI/I2c
  */
 #include "gy521_driver.h"
 #include <stdint.h>

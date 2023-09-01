@@ -1,7 +1,7 @@
 /*
  * Author: Jake Goodwin
  * Date: 2023
- * Description:
+ * Description: A Generic driver for gy521 IMU modules
  */
 
 #ifndef GY521_DRIVER_H
@@ -57,6 +57,9 @@ _Bool gy521_init(struct gy521_module *m, uint8_t slave_address);
 void gy521_update_gyro(struct gy521_module* m);
 void gy521_update_accel(struct gy521_module* m);
 void gy521_free(struct gy521_module *m);
+
+/*These are used instead of direct access; assuming interrupt driven*/
+/*updates to the gy521 then it protects the user from using volatile values*/
 struct accel_values gy521_get_accel(struct gy521_module* m);
 struct gyro_values gy521_get_gyro(struct gy521_module* m);
 
