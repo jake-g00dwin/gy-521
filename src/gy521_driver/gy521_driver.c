@@ -139,38 +139,22 @@ _Bool gy521_init(gy521_module *m, uint8_t slave_address) {
 
 void gy521_update_accel(gy521_module *m)
 {
-    uint8_t read_regs[NUM_ACCEL_REGS] = {accel_xouth, accel_xoutl,
-            accel_youth, accel_youth,
-            accel_zouth, accel_zoutl};
-
-    /*update individually the structure by communicating with the device.*/
-     for(uint8_t i = 0; i < NUM_ACCEL_REGS; i++) {
-        read_regs[i] = read_register(m, read_regs[i]);
-    }
-
-    /*bitshift to reassembly the high/low regs into a single 16bit*/
-    m->accel.x = (read_regs[0] << 8) | read_regs[1];
-    m->accel.y = (read_regs[2] << 8) | read_regs[3];
-    m->accel.z = (read_regs[4] << 8) | read_regs[5];
-
+    m->accel.x = read_register(m, accel_xouth) <<8;
+    m->accel.x |= read_register(m, accel_xoutl);
+    m->accel.y = read_register(m, accel_youth) <<8;
+    m->accel.y |= read_register(m, accel_youtl);
+    m->accel.z = read_register(m, accel_zouth) <<8;
+    m->accel.z |= read_register(m, accel_zoutl);
 }
 
 void gy521_update_gyro(gy521_module *m)
 {
-    uint8_t read_regs[NUM_GYRO_REGS] = {gyro_xouth, gyro_xoutl,
-            gyro_youth, gyro_youth,
-            gyro_zouth, gyro_zoutl};
-
-    /*update individually the structure by communicating with the device.*/
-    for(uint8_t i = 0; i < NUM_GYRO_REGS; i++) {
-        read_regs[i] = read_register(m, read_regs[i]);
-    }
-
-    /*bitshift to reassembly the high/low regs into a single 16bit*/
-    m->gyro.x = (read_regs[0] << 8) | read_regs[1];
-    m->gyro.y = (read_regs[2] << 8) | read_regs[3];
-    m->gyro.z = (read_regs[4] << 8) | read_regs[5];
-
+    m->gyro.x = read_register(m, gyro_xouth) <<8;
+    m->gyro.x |= read_register(m, gyro_xoutl);
+    m->gyro.y = read_register(m, gyro_youth) <<8;
+    m->gyro.y |= read_register(m, gyro_youtl);
+    m->gyro.z = read_register(m, gyro_zouth) <<8;
+    m->gyro.z |= read_register(m, gyro_zoutl);
 }
 
 
