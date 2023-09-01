@@ -39,12 +39,12 @@ void fake_twi_rx(uint8_t slave_addr, uint8_t *data, uint8_t size)
     reg_addr_arr[0].dev_addr = slave_addr;
     
     /*Read the registers requested*/
-    for(; idx < size; idx++) {
+    for(uint8_t i = 0; i < size; i++) {
         /*Wridxte the register read address*/
-        reg_addr_arr[idx].addr = *(data + idx);
+        reg_addr_arr[i + idx].addr = *(data + i);
         
-        /*Read the response value idxnto the pased data ptr*/
-        *(data + idx) = reg_addr_arr[idx].value;
+        /*Read the response value into the pased data ptr*/
+        *(data + i) = reg_addr_arr[i + idx].value;
     }
     /*Post increment the global index*/
     idx++;
@@ -100,16 +100,16 @@ static void test_gy521_update_accel(void **sate)
     for(uint8_t i = 0; i < 6; i++) {
         reg_addr_arr[i].value = i;
     }
-    
+  
+    /*Zero the global index for the TWI*/ 
     idx = 0;  
     gy521_update_accel(m); 
 
-
     /*Ensure the correct registers are read*/
     _Bool is_correct = 1;
-    for(int i = 0; i < 6; i++){
-        /*The starting address of the registers is 59 and goes to 64*/
-        print_message("expected: %d, actual: %d\n", (59+i), reg_addr_arr[i].addr);
+    assert_true(is_correct);
+    for(uint8_t i = 0; i < 6; i++){
+        /*The starting address of the registers is 59 and goes to 64*/ 
         if((59 + i) != reg_addr_arr[i].addr) {
             is_correct = 0;
         }
@@ -117,7 +117,9 @@ static void test_gy521_update_accel(void **sate)
     assert_true(is_correct);     
 
     /*Check that the values are assembled correctly*/
-    
+
+
+
     gy521_free(m);
 }
 
