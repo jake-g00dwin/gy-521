@@ -25,6 +25,7 @@
  * Types/Structures 
  * ############################
  */
+
 typedef struct gyro_values{
     uint16_t x;
     uint16_t y;
@@ -62,5 +63,7 @@ void gy521_free(struct gy521_module *m);
 /*updates to the gy521 then it protects the user from using volatile values*/
 struct accel_values gy521_get_accel(struct gy521_module* m);
 struct gyro_values gy521_get_gyro(struct gy521_module* m);
+
+
 
 #endif /* GY521_DRIVER_H */   
