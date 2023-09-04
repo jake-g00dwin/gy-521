@@ -1,4 +1,3 @@
-add_subdirectory(led_driver)
 add_subdirectory(gy521_driver)
 
 
